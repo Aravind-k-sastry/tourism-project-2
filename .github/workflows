@@ -1,4 +1,3 @@
-%%writefile .github/workflows/pipeline.yml
 name: Tourism Project Pipeline
 
 on:
