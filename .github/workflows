@@ -1,3 +1,4 @@
+%%writefile .github/workflows/pipeline.yml
 name: Tourism Project Pipeline
 
 on:
@@ -12,7 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Install Dependencies
-        run: pip install -r mlops/requirements.txt
+        run: pip install -r tourism_project/requirements.txt
       - name: Upload Dataset to Hugging Face Hub
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
@@ -24,7 +25,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Install Dependencies
-        run: pip install -r mlops/requirements.txt
+        run: pip install -r tourism_project/requirements.txt
       - name: Run Data Preparation
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
@@ -40,8 +41,8 @@ jobs:
         run: pip install -r tourism_project/requirements.txt
       - name: Start MLflow Server
         run: |
-          nohup mlflow ui --host 0.0.0.0 --port 5000 &  # Run MLflow UI in the background
-          sleep 5  # Wait for a moment to let the server starts
+          nohup mlflow ui --host 0.0.0.0 --port 5000 &
+          sleep 5
       - name: Model Building
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
